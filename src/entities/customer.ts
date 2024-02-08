@@ -2,32 +2,37 @@ type CustomerProps = {
   _id: string;
   _name: string;
   _address: string;
+  _activate: boolean;
 };
 
 export default class Customer {
-  constructor(private props: CustomerProps) {}
-
-  get id() {
-    return this.props._id;
+  constructor(private props: CustomerProps) {
+    this.validate();
   }
 
-  set id(id: string) {
-    this.props._id = id;
+  validate() {
+    if (this.props._name.length === 0) {
+      throw new Error("Name is required.");
+    }
+
+    if (this.props._id.length === 0) {
+      throw new Error("Id is required.");
+    }
   }
 
-  get name() {
-    return this.props._name;
-  }
-
-  set name(name: string) {
+  changeName(name: string) {
     this.props._name = name;
+    this.validate();
   }
 
-  get address() {
-    return this.props._address;
+  activate() {
+    if (this.props._address.length === 0) {
+      throw new Error("Address is mandatory to activate a customer.");
+    }
+    this.props._activate = true;
   }
 
-  set address(address: string) {
-    this.props._address = address;
+  deactivate() {
+    this.props._activate = false;
   }
 }
