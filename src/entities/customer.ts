@@ -1,10 +1,10 @@
 import Address from "./address";
 
 type CustomerProps = {
-  _id: string;
-  _name: string;
-  _address?: Address;
-  _activate: boolean;
+  id: string;
+  name: string;
+  address?: Address;
+  activate?: boolean;
 };
 
 export default class Customer {
@@ -13,32 +13,32 @@ export default class Customer {
   }
 
   set address(address: Address) {
-    this.props._address = address;
+    this.props.address = address;
   }
 
   validate() {
-    if (this.props._name.length === 0) {
+    if (this.props.name.length === 0) {
       throw new Error("Name is required.");
     }
 
-    if (this.props._id.length === 0) {
+    if (this.props.id.length === 0) {
       throw new Error("Id is required.");
     }
   }
 
   changeName(name: string) {
-    this.props._name = name;
+    this.props.name = name;
     this.validate();
   }
 
   activate() {
-    if (!this.props._address) {
+    if (!this.props.address) {
       throw new Error("Address is mandatory to activate a customer.");
     }
-    this.props._activate = true;
+    this.props.activate = true;
   }
 
   deactivate() {
-    this.props._activate = false;
+    this.props.activate = false;
   }
 }
