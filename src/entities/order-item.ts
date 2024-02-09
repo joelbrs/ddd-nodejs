@@ -6,4 +6,8 @@ type OrderItemProps = {
 
 export default class OrderItem {
   constructor(private props: OrderItemProps) {}
+
+  get price() {
+    return this.props.price;
+  }
 }
